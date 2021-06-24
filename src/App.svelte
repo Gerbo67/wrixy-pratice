@@ -1,6 +1,7 @@
 <script>
     import {onMount} from 'svelte';
     import LogoWrixy from './components/LogoWrixy.svelte';
+    import Page from './components/Page.svelte';
 
     let data = [];
 
@@ -75,9 +76,15 @@
 </style>
 
 <main>
-    <div class="loader-container">
-        <div class="loader">
-            <LogoWrixy/>
+    {#if data.length > 0}
+        <div>
+            <Page/>
         </div>
-    </div>
+    {:else}
+        <div class="loader-container">
+            <div class="loader">
+                <LogoWrixy/>
+            </div>
+        </div>
+    {/if}
 </main>
