@@ -17,17 +17,33 @@
 
         }
     })
+
 </script>
 
 <style>
     :global(:root) {
+        --small: 576px;
+        --medium: 768px;
+        --large: 992px;
+        --extra-large: 1200px;
+        --extra-extra-large: 1400px;
+
+        --height-header: 4.8rem;
+        --header-elements: 160px;
+
+        --widht-card: 13rem;
+        --height-card: auto;
+
+        --font-family: 'Mukta', sans-serif;
+
         --primary: #B77FDC;
         --secondary: #F9EBFD;
+        --background: #FDF9FF;
         --white: #FFF;
         --dark-shadow: #00000042;
         --dark: #AC9DA9AA;
-        --header-elements: 160px;
-        --font-family: 'Mukta', sans-serif;
+        --sub-secondary: #E1BBED;
+
 
         --z-back: -10;
         --z-normal: 1;
@@ -36,7 +52,12 @@
         --z-modal: 1000;
     }
 
+    body{
+        background-color: var(--background);
+    }
+
     main {
+        display: inline;
         padding: 0;
         margin: 0;
         height: 100%;
@@ -76,7 +97,7 @@
 </style>
 
 <main>
-    {#if data.length > 0}
+    {#if data.length == 0}
         <div>
             <Page/>
         </div>

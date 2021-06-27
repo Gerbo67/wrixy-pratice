@@ -1,10 +1,14 @@
 <script>
     const showMenu = () => {
         const nav = document.getElementById('main-nav');
+        const header = document.getElementById('header-nav');
+
         if (nav.style.right === '0vw') {
             nav.style.right = '-80vw';
+            header.style.borderRadius = '0 0 2rem 2rem';
         } else {
             nav.style.right = '0vw';
+            header.style.borderRadius = '0 0 0rem 2rem';
         }
     }
 
@@ -12,9 +16,10 @@
 
 <style>
     header {
+        position: fixed;
         z-index: var(--z-fixed);
         width: 100%;
-        height: 4.8rem;
+        height: var(--height-header);
         background: var(--white);
         border-radius: 0 0 2rem 2rem;
         display: flex;
@@ -97,7 +102,7 @@
     }
 
 
-    @media (max-width: 960px) {
+    @media (max-width: 1000px) {
         .header-search.length, .header-profile.length {
             display: none;
         }
@@ -124,15 +129,15 @@
 
         .main-nav {
             position: fixed;
-            height: calc(100vh - 4.8rem);
+            height: calc(100vh - var(--height-header));
             width: 70vw;
-            background: transparent;
+            background: white;
             box-shadow: -4px 10px 4px var(--dark-shadow);
             top: 4.3rem;
             right: -80vw;
             transition: right .3s;
             padding-top: 1rem;
-            z-index: var(--z-fixed);
+            z-index: var(--z-tooltip);
             display: flex;
             flex-flow: column;
         }
@@ -145,13 +150,15 @@
         }
 
         .main-menu-toggle {
-            display: block;
+            display: flex;
+            width: 32px;
+            justify-content: center;
         }
 
     }
 </style>
 
-<header>
+<header id="header-nav">
     <div class="main-nav" id="main-nav">
         <div class="main-nav__block">
             <div class="header-profile small">
