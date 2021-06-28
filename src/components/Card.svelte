@@ -1,28 +1,45 @@
 <script>
-    window.addEventListener("load", ()=>{
+    export let book = [];
+
+    window.addEventListener("load", () => {
         size();
     });
-    window.addEventListener("resize", ()=>{
+    window.addEventListener("resize", () => {
         size();
     });
 
-    const size = () =>{
+    const size = () => {
         const CardId = document.getElementsByClassName('Card');
-        for(let i = 0; i < CardId.length; i++){
-            CardId[i].style.height = ''+CardId[i].offsetWidth * 1.57+'px';
-            CardId[i].style.fontSize = CardId[i].offsetWidth * 0.13+'px';
+        for (let i = 0; i < CardId.length; i++) {
+            CardId[i].style.height = '' + CardId[i].offsetWidth * 1.57 + 'px';
+            CardId[i].style.fontSize = CardId[i].offsetWidth * 0.13 + 'px';
         }
     }
 
+    const countDesign = (num) => {
+        if (num >= 1000) {
+            return `${num / 1000}k`
+        } else if (num >= 1000000) {
+            return `${num / 1000000}M`
+        } else {
+            return num;
+        }
+    }
+
+    const descriptionDesign = (text) => {
+        let length = 468;
+        if(text.length>length){
+            return text.substring(0,length-3)+"...";
+        }
+        return text;
+    }
 </script>
 
 <style>
-    .Card{
+    .Card {
         width: 100%;
         min-width: var(--widht-card);
         height: calc(1.9 * var(--widht-card));
-        background: url("https://d3uyhmwgrp7r7f.cloudfront.net/1611179959785_cover.png");
-        background-size: cover;
         cursor: pointer;
         transition: transform 400ms, height 200ms;
         padding: 0.1px;
@@ -30,24 +47,24 @@
         font-size: 200%;
     }
 
-    .Card:hover{
+    .Card:hover {
         transform: scale(1.2);
     }
 
-    .Card:active{
+    .Card:active {
         transform: scale(1.1);
         transition: transform 100ms;
     }
 
-    .Card:hover > .Card__Content{
+    .Card:hover > .Card__Content {
         display: block;
     }
 
-    .Card:hover > .CardFooterActive{
+    .Card:hover > .CardFooterActive {
         display: none;
     }
 
-    .Card__Content{
+    .Card__Content {
         display: none;
         width: 100%;
         height: 100%;
@@ -56,13 +73,13 @@
         opacity: 0.9;
     }
 
-    .CardHeader{
+    .CardHeader {
         width: 100%;
         height: 20%;
         padding: 0.1px;
     }
 
-    .ContentTitle{
+    .ContentTitle {
         margin: 1rem;
         display: flex;
         justify-content: center;
@@ -70,30 +87,31 @@
         font-family: var(--font-family);
         font-weight: 600;
         font-size: 0.7em;
+        text-align: center;
         color: white;
     }
 
-    .CardBody{
+    .CardBody {
         width: 100%;
         height: 60%;
         padding: 0.1px;
     }
 
-    .ContentDescription{
+    .ContentDescription {
         margin: 1rem;
         font-family: var(--font-family);
         font-size: 0.35em;
         color: white;
     }
 
-    .CardFooter{
+    .CardFooter {
         width: 100%;
         height: 20%;
         padding: 0.1px;
         font-size: 0.5em;
     }
 
-    .CardFooterActive{
+    .CardFooterActive {
         width: 100%;
         height: 100%;
         padding: 0.1px;
@@ -103,14 +121,14 @@
         font-size: 0.5em;
     }
 
-    .CardFooterActive .ContentIcons{
+    .CardFooterActive .ContentIcons {
         width: 100%;
         height: 20%;
         border-radius: 5px;
         background: linear-gradient(transparent, rgba(0, 0, 0, 0.86) 50%);
     }
 
-    .ContentIcons{
+    .ContentIcons {
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -118,49 +136,42 @@
         color: white;
     }
 
-    .IconCount{
+    .IconCount {
         margin-left: 0.5rem;
     }
 </style>
 
-<div class="Card">
+<div class="Card" style='background: url("{book.UrlImg}"); background-size: cover;'>
     <div class="Card__Content">
         <div class="CardHeader">
             <div class="ContentTitle">
-                    <span class="CardHeader__Title">
-                        Muerde o Muere
-                    </span>
+                <span class="CardHeader__Title">{book.Title}</span>
             </div>
         </div>
         <div class="CardBody">
             <div class="ContentDescription">
-                    <span class="CardBody__Description">
-                    Esto no va a ser uno de esos típicos libros de
-                    autoayuda con consejos abstractos y sin sentido.
-                    Estos que te dicen que “sé feliz” y no te dan
-                    herramientas concretas para ello. O incluso cuando
-                    las dan, son demasiado irreales para aplicarlas a la
-                    vida cotidiana. Voy a ser crudo contigo. Seré bruto.
-                    Te diré las cosas y la realidad tal cual es. No me
-                    voy a cortar un pelo. Te ofenderé, te haré sentir mal,
-                    o que incluso la vida parezca una mentira el resto de
-                    tus días.
-                </span>
+                <span class="CardBody__Description">{descriptionDesign(book.Descriptions)}</span>
             </div>
         </div>
         <div class="CardFooter">
             <div class="ContentIcons">
-                <div class="CardFooterIcons"><i class="fas fa-eye"></i><span class="IconCount">857k</span></div>
-                <div class="CardFooterIcons"><i class="fas fa-comments"></i><span class="IconCount">525</span></div>
-                <div class="CardFooterIcons"><i class="fas fa-heart"></i><span class="IconCount">7.7k</span></div>
+                <div class="CardFooterIcons"><i class="fas fa-eye"></i><span
+                        class="IconCount">{countDesign(book.NumViews)}</span></div>
+                <div class="CardFooterIcons"><i class="fas fa-comments"></i><span
+                        class="IconCount">{countDesign(book.NumComments)}</span></div>
+                <div class="CardFooterIcons"><i class="fas fa-heart"></i><span
+                        class="IconCount">{countDesign(book.NumLikes)}</span></div>
             </div>
         </div>
     </div>
     <div class="CardFooterActive">
         <div class="ContentIcons">
-            <div class="CardFooterIcons"><i class="fas fa-eye"></i><span class="IconCount">857k</span></div>
-            <div class="CardFooterIcons"><i class="fas fa-comments"></i><span class="IconCount">525</span></div>
-            <div class="CardFooterIcons"><i class="fas fa-heart"></i><span class="IconCount">7.7k</span></div>
+            <div class="CardFooterIcons"><i class="fas fa-eye"></i><span
+                    class="IconCount">{countDesign(book.NumViews)}</span></div>
+            <div class="CardFooterIcons"><i class="fas fa-comments"></i><span
+                    class="IconCount">{countDesign(book.NumComments)}</span></div>
+            <div class="CardFooterIcons"><i class="fas fa-heart"></i><span
+                    class="IconCount">{countDesign(book.NumLikes)}</span></div>
         </div>
     </div>
 </div>

@@ -1,6 +1,8 @@
 <script>
     import ButtonG from './ButtonGeneral.svelte';
     import ContentCard from './ContentCard.svelte';
+
+    export let data = [];
 </script>
 
 <style>
@@ -48,5 +50,5 @@
         </div>
     </div>
 
-    <ContentCard/>
+    <ContentCard {data}/>
 </div>

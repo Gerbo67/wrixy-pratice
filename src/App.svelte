@@ -97,9 +97,9 @@
 </style>
 
 <main>
-    {#if data.length == 0}
+    {#if data.length > 0}
         <div>
-            <Page/>
+            <Page {data}/>
         </div>
     {:else}
         <div class="loader-container">

@@ -1,6 +1,8 @@
 <script>
     import HeaderG from './HeaderG.svelte';
     import Home from './Home.svelte';
+
+    export let data = [];
 </script>
 
 <style>
@@ -10,6 +12,6 @@
 </style>
 <div class="bodyclass">
     <HeaderG/>
-    <Home/>
+    <Home {data}/>
 </div>
 

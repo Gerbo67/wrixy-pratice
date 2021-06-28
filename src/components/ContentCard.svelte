@@ -1,11 +1,10 @@
 <script>
     import Card from './Card.svelte';
-
-    export let data = 0;
+    export let data = [];
 </script>
 
 <style>
-    .BodyCard{
+    .BodyCard {
         display: flex;
         justify-content: space-around;
         align-items: start;
@@ -13,27 +12,27 @@
         margin: 4rem 0;
     }
 
-    .BodyCard__Anuncio{
+    .BodyCard__Anuncio {
         min-width: 6rem;
         max-width: 10rem;
-        height: 30vh;
+        height: 20rem;
         border: 10px solid #b67edb;
         z-index: var(--z-normal);
     }
 
-    .BodyCard__Cards{
+    .BodyCard__Cards {
         width: 75vw;
         height: auto;
         z-index: var(--z-tooltip);
         display: grid;
-        grid-template-columns: repeat(auto-fill,minmax(var(--widht-card),1fr));
+        grid-template-columns: repeat(auto-fill, minmax(var(--widht-card), 1fr));
         grid-gap: 4rem;
         justify-items: center;
         /*background-color: antiquewhite;*/
     }
 
     @media (max-width: 1000px) {
-        .BodyCard__Anuncio{
+        .BodyCard__Anuncio {
             display: none;
         }
     }
@@ -43,13 +42,9 @@
 <div class="BodyCard">
     <div class="BodyCard__Anuncio"></div>
     <div class="BodyCard__Cards">
-       <Card />
-       <Card />
-       <Card />
-       <Card />
-       <Card />
-       <Card />
-       <Card />
+        {#each data as book (book.IdBook)}
+            <Card {book}/>
+        {/each}
     </div>
     <div class="BodyCard__Anuncio"></div>
 </div>
