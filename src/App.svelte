@@ -8,7 +8,7 @@
     onMount(async () => {
         try {
             const protocolo = window.location.protocol != 'https:' ? 'http' : 'https';
-            let response = await fetch(`${protocolo}://localhost:3000`);
+            let response = await fetch(`${protocolo}://wrixyapi-env.eba-wmdeitqi.us-west-2.elasticbeanstalk.com/`);
             response = await response.json();
             data = response;
 
