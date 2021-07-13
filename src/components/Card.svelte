@@ -11,7 +11,7 @@
     const size = () => {
         const CardId = document.getElementsByClassName('Card');
         for (let i = 0; i < CardId.length; i++) {
-            CardId[i].style.height = '' + CardId[i].offsetWidth * 1.63 + 'px';
+            CardId[i].style.height = '' + CardId[i].offsetWidth * 1.57 + 'px';
             CardId[i].style.fontSize = CardId[i].offsetWidth * 0.13 + 'px';
         }
     }
@@ -39,7 +39,7 @@
     .Card {
         width: 100%;
         min-width: var(--widht-card);
-        height: calc(1.63 * var(--widht-card));
+        height: calc(1.57 * var(--widht-card));
         cursor: pointer;
         transition: transform 400ms, height 200ms;
         padding: 1px;
