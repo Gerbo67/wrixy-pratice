@@ -86,18 +86,20 @@
 
     .Poster__Content {
         margin-bottom: 30%;
+        color: var(--dark-primary);
     }
 
     .Poster__Title {
         white-space: normal;
-        font-weight: bold;
-        color: var(--dark-primary);
+        font-weight: 800;
+
         width: 10em;
     }
 
     .Poster__Autor{
         padding-top: 1em;
         font-size: 0.8em;
+        font-weight: bold;
     }
 
     .Poster__Img {
@@ -230,7 +232,7 @@
             <div class="Poster__Content">
                 <img class="Poster__Img" src="./img/LogoPoster.png" alt="WrixyLogo">
                 <p class="Poster__Title">{book.Title}</p>
-                <p class="Poster__Autor">Anonimo</p>
+                <p class="Poster__Autor">By: Anonimo</p>
             </div>
         </div>
         <div class="Card__Content">
