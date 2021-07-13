@@ -37,11 +37,13 @@
         --font-family: 'Mukta', sans-serif;
 
         --primary: #B77FDC;
+        --sub-primary: #F0C4FE;
         --secondary: #F9EBFD;
         --background: #FDF9FF;
         --white: #FFF;
         --dark-shadow: #00000042;
         --dark: #AC9DA9AA;
+        --dark-primary: #55464A;
         --sub-secondary: #E1BBED;
 
 
