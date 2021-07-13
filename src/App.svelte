@@ -31,7 +31,7 @@
         --height-header: 4.8rem;
         --header-elements: 160px;
 
-        --widht-card: 13rem;
+        --widht-card: 12vw;
         --height-card: auto;
 
         --font-family: 'Mukta', sans-serif;

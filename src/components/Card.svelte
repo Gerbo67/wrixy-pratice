@@ -11,7 +11,7 @@
     const size = () => {
         const CardId = document.getElementsByClassName('Card');
         for (let i = 0; i < CardId.length; i++) {
-            CardId[i].style.height = '' + CardId[i].offsetWidth * 1.57 + 'px';
+            CardId[i].style.height = '' + CardId[i].offsetWidth * 1.63 + 'px';
             CardId[i].style.fontSize = CardId[i].offsetWidth * 0.13 + 'px';
         }
     }
@@ -39,10 +39,10 @@
     .Card {
         width: 100%;
         min-width: var(--widht-card);
-        height: calc(1.9 * var(--widht-card));
+        height: calc(1.63 * var(--widht-card));
         cursor: pointer;
         transition: transform 400ms, height 200ms;
-        padding: 0.1px;
+        padding: 1px;
         border-radius: 5px;
         font-size: 200%;
     }
@@ -76,7 +76,7 @@
     .CardHeader {
         width: 100%;
         height: 20%;
-        padding: 0.1px;
+        padding: 1px;
     }
 
     .ContentTitle {
@@ -94,7 +94,7 @@
     .CardBody {
         width: 100%;
         height: 60%;
-        padding: 0.1px;
+        padding: 1px;
     }
 
     .ContentDescription {
@@ -107,14 +107,14 @@
     .CardFooter {
         width: 100%;
         height: 20%;
-        padding: 0.1px;
+        padding: 1px;
         font-size: 0.5em;
     }
 
     .CardFooterActive {
         width: 100%;
         height: 100%;
-        padding: 0.1px;
+        padding: 1px;
         display: flex;
         align-items: flex-end;
         justify-content: center;
@@ -134,14 +134,21 @@
         align-items: center;
         height: 100%;
         color: white;
+        font-family: var(--font-family);
     }
 
     .IconCount {
         margin-left: 0.5rem;
     }
+
+    @media (max-width: 1000px) {
+        .Card{
+            min-width: 20vw;
+        }
+    }
 </style>
 
-<div class="Card" style='background: url("{book.UrlImg}"); background-size: cover;'>
+<div class="Card" style='background: url({book.UrlImg}); background-size: cover;'>
     <div class="Card__Content">
         <div class="CardHeader">
             <div class="ContentTitle">
