@@ -11,7 +11,6 @@
             header.style.borderRadius = '0 0 0rem 2rem';
         }
     }
-
 </script>
 
 <style>

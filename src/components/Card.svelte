@@ -4,6 +4,7 @@
     window.addEventListener("load", () => {
         size();
     });
+
     window.addEventListener("resize", () => {
         size();
     });
@@ -11,7 +12,7 @@
     const size = () => {
         const CardId = document.getElementsByClassName('Card');
         for (let i = 0; i < CardId.length; i++) {
-            CardId[i].style.height = '' + CardId[i].offsetWidth * 1.57 + 'px';
+            CardId[i].style.height = CardId[i].offsetWidth * 1.57 + 'px';
             CardId[i].style.fontSize = CardId[i].offsetWidth * 0.13 + 'px';
         }
     }
@@ -27,7 +28,7 @@
     }
 
     const descriptionDesign = (text) => {
-        let length = 450;
+        let length = 400;
         if (text.length > length) {
             return text.substring(0, length - 3) + "...";
         }
@@ -45,10 +46,12 @@
         padding: 0.1px;
         border-radius: 5px;
         font-size: 200%;
+        background-size: cover !important;
     }
 
     .Card:hover {
         transform: scale(1.2);
+        z-index: var(--z-modal);
     }
 
     .Card:active {
@@ -96,7 +99,7 @@
         width: 10em;
     }
 
-    .Poster__Autor{
+    .Poster__Autor {
         padding-top: 1em;
         font-size: 0.8em;
         font-weight: bold;
@@ -112,7 +115,7 @@
         height: 100%;
         border-radius: 5px;
         background-color: black;
-        opacity: 0.9;
+        opacity: 0.8;
     }
 
     .CardHeader {
@@ -122,26 +125,31 @@
     }
 
     .ContentTitle {
+        height: 100%;
         margin: 1rem;
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 0.1px;
         font-family: var(--font-family);
         font-weight: 600;
         font-size: 0.7em;
-        line-height: 1.2;
+        line-height: 1.1;
         text-align: center;
         color: white;
     }
 
     .CardBody {
         width: 100%;
-        height: 60%;
+        height: 65%;
         padding: 0.1px;
     }
 
     .ContentDescription {
-        margin: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1rem 1rem 0 1rem;
         font-family: var(--font-family);
         font-size: 0.35em;
         color: white;
@@ -149,7 +157,7 @@
 
     .CardFooter {
         width: 100%;
-        height: 20%;
+        height: 15%;
         padding: 0.1px;
         font-size: 0.5em;
     }
@@ -166,7 +174,7 @@
 
     .CardFooterActive .ContentIcons {
         width: 100%;
-        height: 20%;
+        height: 15%;
         border-radius: 5px;
         background: linear-gradient(transparent, rgba(0, 0, 0, 0.86) 50%);
     }
@@ -186,13 +194,37 @@
 
     @media (max-width: 1000px) {
         .Card {
-            min-width: 20vw;
+            width: 100%;
+            min-width: 15vw;
+            height: calc(1.57 * 15vw);
+            padding: 0.1px;
+            border-radius: 5px;
+            font-size: 100%;
+        }
+
+        .CardHeader__Title {
+            font-size: 0.72em;
+            margin: 0 0.4rem;
+        }
+
+        .CardFooter {
+            font-size: 0.5em;
+        }
+
+        .CardFooterActive {
+            font-size: 0.5em;
+        }
+
+        .ContentDescription {
+            margin: 0.6rem 0.4rem;
+            line-height: 3em;
+            font-size: 0.2em;
         }
     }
 </style>
 
 {#if book.UrlImg != ''}
-    <div class="Card" style='background: url("{book.UrlImg}"); background-size: cover;'>
+    <div class="Card" style='background: url("{book.UrlImg}");'>
         <div class="Card__Content">
             <div class="CardHeader">
                 <div class="ContentTitle">

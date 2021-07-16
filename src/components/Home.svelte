@@ -1,8 +1,7 @@
 <script>
+    import {booksPage} from '../store'
     import ButtonG from './ButtonGeneral.svelte';
     import ContentCard from './ContentCard.svelte';
-
-    export let data = [];
 </script>
 
 <style>
@@ -50,5 +49,5 @@
         </div>
     </div>
 
-    <ContentCard {data}/>
+    <ContentCard data={$booksPage}/>
 </div>

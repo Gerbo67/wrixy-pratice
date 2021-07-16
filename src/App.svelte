@@ -2,22 +2,56 @@
     import {onMount} from 'svelte';
     import LogoWrixy from './components/LogoWrixy.svelte';
     import Page from './components/Page.svelte';
+    import {booksPage} from './store/index';
 
     let data = [];
 
     onMount(async () => {
         try {
+
+            // declaracion de headers
+            const headers = new Headers({
+                'Content-Type': 'application/json'
+            });
+
+            // asignacion datos iniciales
+            const dataInit = {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({page: 1}),
+            }
+
+            // verificar SSL
             const protocolo = window.location.protocol != 'https:' ? 'http' : 'https';
-            let response = await fetch(`${protocolo}://localhost:3000`);
-            response = await response.json();
-            data = response;
 
-            console.log(response);
+            // consulta con url
+            let response = await fetch(`${protocolo}://192.168.0.113:3000/books`, dataInit);
+
+            // verificacion status
+            switch (response.status) {
+                case 200: {
+                    response = await response.json();
+                    booksPage.set(response);
+                    data = response.data;
+                }
+                    break;
+                case 422: {
+                    alert('Se ha enviado una pagina incorrecta');
+                }
+                    break;
+                case 204: {
+                    alert('No hay datos en esa pagina');
+                }
+                    break;
+                default: {
+                    alert('Internal Error');
+                }
+            }
         } catch (e) {
-
+            alert('Error en consulta')
+            console.log(e);
         }
     })
-
 </script>
 
 <style>
@@ -54,7 +88,7 @@
         --z-modal: 1000;
     }
 
-    body{
+    body {
         background-color: var(--background);
     }
 
@@ -101,7 +135,7 @@
 <main>
     {#if data.length > 0}
         <div>
-            <Page {data}/>
+            <Page/>
         </div>
     {:else}
         <div class="loader-container">
