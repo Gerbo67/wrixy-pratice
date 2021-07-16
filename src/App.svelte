@@ -25,7 +25,7 @@
             const protocolo = window.location.protocol != 'https:' ? 'http' : 'https';
 
             // consulta con url
-            let response = await fetch(`${protocolo}://192.168.0.113:3000/books`, dataInit);
+            let response = await fetch(`${protocolo}://wrixyapi-env.eba-wmdeitqi.us-west-2.elasticbeanstalk.com/books`, dataInit);
 
             // verificacion status
             switch (response.status) {
