@@ -7,5 +7,5 @@
 </p>
 
 <p align="center">
-  <b>Para ver el codigo de backend /b>👉<a href="https://github.com/Gerbo67/WrixyBackEnd">PICAMEE</a>👈
+  <b>Para ver el codigo de backend </b>👉<a href="https://github.com/Gerbo67/WrixyBackEnd">PICAMEE</a>👈
 </p>
