@@ -53,7 +53,7 @@
             const protocolo = window.location.protocol != 'https:' ? 'http' : 'https';
 
             // consulta con url
-            let response = await fetch(`${protocolo}://wrixyapi-env.eba-wmdeitqi.us-west-2.elasticbeanstalk.com/books`, dataInit);
+            let response = await fetch(`${protocolo}://wrixybackend.herokuapp.com/books`, dataInit);
 
             // verificacion status
             switch (response.status) {
