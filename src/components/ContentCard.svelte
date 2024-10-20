@@ -26,43 +26,66 @@
         }
     }
 
+    const getDummyData = (page) => {
+        let totalBooks = 50; // Total ficticio de libros disponibles
+        let pageSize = 10;
+        let totalPages = Math.ceil(totalBooks / pageSize);
+
+        let start = (page - 1) * pageSize;
+        let books = [];
+        const images = [
+            './img/posters/Libro1.png',
+            './img/posters/Libro2.png',
+            './img/posters/Libro3.png',
+            './img/posters/Libro4.png'
+        ];
+
+        for (let i = start; i < start + pageSize && i < totalBooks; i++) {
+            books.push({
+                IdBook: i + 1,
+                Title: `Libro ${i + 1}`,
+                UrlImg: images[Math.floor(Math.random() * images.length)], // Selección aleatoria de imagen
+                NumViews: Math.floor(Math.random() * 500),
+                NumComments: Math.floor(Math.random() * 100),
+                NumLikes: Math.floor(Math.random() * 200),
+                Descriptions: `Descripción del libro ${i + 1}`
+            });
+        }
+
+        return {
+            status: 200,
+            data: {
+                currentPage: page,
+                totalPages,
+                data: books
+            }
+        };
+    };
+
+    const fetchDummyData = (page) => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(getDummyData(page));
+            }, 2000);
+        });
+    };
+
+
+
     const queryPage = async (page) => {
-        // inicio de loader
         const BodyCard = document.getElementById('BodyCard');
-        const heightBody = BodyCard.offsetHeight;
-        const widhtBody = BodyCard.offsetWidth;
-        BodyCard.style.opacity = '0';
         const loader = document.getElementById('LoaderCard');
-        loader.style.height = `${heightBody}px`;
-        loader.style.width = `${widhtBody}px`;
+        BodyCard.style.opacity = '0';
         loader.style.opacity = '1';
         try {
-            // declaracion de headers
-            const headers = new Headers({
-                'Content-Type': 'application/json'
-            });
+            let response = await fetchDummyData(page);
 
-            // asignacion datos iniciales
-            const dataInit = {
-                method: 'POST',
-                headers,
-                body: JSON.stringify({page}),
-            }
-
-            // verificar SSL
-            const protocolo = window.location.protocol != 'https:' ? 'http' : 'https';
-
-            // consulta con url
-            let response = await fetch(`${protocolo}://wrixybackend.herokuapp.com/books`, dataInit);
-
-            // verificacion status
             switch (response.status) {
                 case 200: {
-                    response = await response.json();
-                    booksPage.set(response);
+                    booksPage.set(response.data);
                     BodyCard.style.opacity = '1';
                     loader.style.opacity = '0';
-                    size();
+                    data = response.data.data;
                 }
                     break;
                 case 422: {
@@ -80,29 +103,29 @@
                 }
             }
         } catch (e) {
+            console.log(e)
             alert('Error en consulta');
             BodyCard.style.opacity = '1';
             loader.style.opacity = '0';
         }
-    }
+    };
+
 
     const updateStoreBook = async (current, total, navigation) => {
         if (navigation === 'Left') {
             if (current > 1) {
-                // consulta
                 let currentNew = current - 1;
                 await queryPage(currentNew);
                 buttonsActive();
             }
         } else {
-            if (current != total) {
-                // consulta
+            if (current < total) {
                 let currentNew = current + 1;
                 await queryPage(currentNew);
                 buttonsActive();
             }
         }
-    }
+    };
 
     const buttonsActive = () => {
         if ($booksPage.currentPage === $booksPage.totalPages) {
@@ -164,8 +187,11 @@
         align-items: center;
     }
 
-    .LoaderCard{
-        position: absolute;
+    .LoaderCard {
+        position: fixed; /* Cambiar a fixed para que esté centrado en toda la pantalla */
+        top: 50%;        /* Posición en la mitad vertical de la pantalla */
+        left: 50%;       /* Posición en la mitad horizontal de la pantalla */
+        transform: translate(-50%, -50%); /* Translada el elemento al centro exacto */
         display: flex;
         flex-direction: row;
         align-items: center;

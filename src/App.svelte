@@ -4,35 +4,64 @@
     import Page from './components/Page.svelte';
     import {booksPage} from './store/index';
 
+
     let data = [];
+
+    const getDummyData = (page) => {
+        let totalBooks = 50; // Total ficticio de libros disponibles
+        let pageSize = 10;
+        let totalPages = Math.ceil(totalBooks / pageSize);
+
+        let start = (page - 1) * pageSize;
+        let books = [];
+        const images = [
+            './img/posters/Libro1.png',
+            './img/posters/Libro2.png',
+            './img/posters/Libro3.png',
+            './img/posters/Libro4.png'
+        ];
+
+        for (let i = start; i < start + pageSize && i < totalBooks; i++) {
+            books.push({
+                IdBook: i + 1,
+                Title: `Libro ${i + 1}`,
+                UrlImg: images[Math.floor(Math.random() * images.length)], // Selección aleatoria de imagen
+                NumViews: Math.floor(Math.random() * 500),
+                NumComments: Math.floor(Math.random() * 100),
+                NumLikes: Math.floor(Math.random() * 200),
+                Descriptions: `Descripción del libro ${i + 1}`
+            });
+        }
+
+        return {
+            status: 200,
+            data: {
+                currentPage: page,
+                totalPages,
+                data: books
+            }
+        };
+    };
+
+    const fetchDummyData = (page) => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(getDummyData(page));
+            }, 2000);
+        });
+    };
 
     onMount(async () => {
         try {
+            // Simulación de respuesta de la API
+            let response = await fetchDummyData(1);
 
-            // declaracion de headers
-            const headers = new Headers({
-                'Content-Type': 'application/json'
-            });
 
-            // asignacion datos iniciales
-            const dataInit = {
-                method: 'POST',
-                headers,
-                body: JSON.stringify({page: 1}),
-            }
-
-            // verificar SSL
-            const protocolo = window.location.protocol != 'https:' ? 'http' : 'https';
-
-            // consulta con url
-            let response = await fetch(`${protocolo}://wrixybackend.herokuapp.com/books`, dataInit);
-
-            // verificacion status
+            // Verificación del status de la respuesta simulado
             switch (response.status) {
                 case 200: {
-                    response = await response.json();
-                    booksPage.set(response);
-                    data = response.data;
+                    booksPage.set(response.data);
+                    data = response.data.data;
                 }
                     break;
                 case 422: {
@@ -48,10 +77,10 @@
                 }
             }
         } catch (e) {
-            alert('Error en consulta')
+            alert('Error en consulta');
             console.log(e);
         }
-    })
+    });
 </script>
 
 <style>

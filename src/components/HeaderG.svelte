@@ -175,7 +175,7 @@
     </div>
     <div class="header-elements">
         <div class="header-logo">
-            <img class="header-logo__img" src="https://wrixy.com/assets/img/logo.png" alt="Logo Wrixy">
+            <img class="header-logo__img" src="./img/wrixylogo.png" alt="Logo Wrixy">
         </div>
         <div class="main-menu-toggle" id="main-menu-toggle" on:click={showMenu}><i class="fas fa-bars"></i></div>
         <div class="header-search length">
@@ -190,7 +190,7 @@
             </div>
         </div>
         <div class="header-profile length">
-            <span>Iniciar sesión</span><i class="fas fa-user-circle"></i>
+            <span style="font-family: 'Mukta', sans-serif">Iniciar sesión</span><i class="fas fa-user-circle"></i>
         </div>
     </div>
 </header>
